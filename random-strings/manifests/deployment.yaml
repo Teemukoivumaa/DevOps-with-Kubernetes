@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: random-strings-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: random-strings
+  template:
+    metadata:
+      labels:
+        app: random-strings
+    spec:
+      containers:
+        - name: random-strings
+          image: teemukoivumaa/random-strings:latest
