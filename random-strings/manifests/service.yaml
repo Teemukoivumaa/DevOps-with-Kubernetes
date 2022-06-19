@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: random-strings-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: random-strings
+  ports:
+    - port: 2345 # Ingress port
+      protocol: TCP
+      targetPort: 8080 # App port
