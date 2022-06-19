@@ -12,6 +12,18 @@ spec:
       labels:
         app: random-strings
     spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
       containers:
-        - name: random-strings
-          image: teemukoivumaa/random-strings:1.0.3
+        - name: random-hasher
+          image: teemukoivumaa/random-strings:1.0.4
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/files
+        - name: timestamper
+          image: teemukoivumaa/timestamper:1.0.0
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/files
+

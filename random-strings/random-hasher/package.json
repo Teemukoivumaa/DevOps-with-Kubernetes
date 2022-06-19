@@ -1,0 +1,15 @@
+{
+  "name": "random-hasher",
+  "version": "1.0.4",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Teemu Koivumaa",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "read-last-lines": "^1.8.0"
+  }
+}
