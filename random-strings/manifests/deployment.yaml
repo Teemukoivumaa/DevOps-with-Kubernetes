@@ -14,10 +14,11 @@ spec:
     spec:
       volumes:
         - name: shared-log
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: random-strings-claim
       containers:
         - name: random-hasher
-          image: teemukoivumaa/random-strings:1.0.4
+          image: teemukoivumaa/random-strings:1.0.5
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
@@ -26,4 +27,9 @@ spec:
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
-
+        - name: ping-pong
+          image: teemukoivumaa/ping-pong:1.1.2
+          imagePullPolicy: "Always"
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/files

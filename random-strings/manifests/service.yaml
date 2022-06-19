@@ -5,8 +5,21 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: random-strings
+    app: random-strings # Pod name
   ports:
     - port: 2345 # Ingress port
       protocol: TCP
       targetPort: 8080 # App port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ping-pong-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: random-strings # Pod name
+  ports:
+    - port: 2346 # Ingress port
+      protocol: TCP
+      targetPort: 8081 # App port
