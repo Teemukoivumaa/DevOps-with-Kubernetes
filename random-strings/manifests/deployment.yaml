@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: random-strings
-          image: teemukoivumaa/random-strings:latest
+          image: teemukoivumaa/random-strings:1.0.3
