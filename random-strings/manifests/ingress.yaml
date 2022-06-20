@@ -4,7 +4,8 @@ metadata:
   name: random-strings-ingress
 spec:
   rules:
-  - http:
+  - host: localhost
+    http:
       paths:
       - path: /
         pathType: Prefix
@@ -13,3 +14,10 @@ spec:
             name: random-strings-svc # Service name
             port:
               number: 2345 # Port thats declared in service.yaml
+      - path: /pong
+        pathType: Prefix
+        backend:
+          service:
+            name: ping-pong-svc # Service name
+            port:
+              number: 2346 # Port thats declared in service.yaml
