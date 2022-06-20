@@ -18,7 +18,11 @@ spec:
             claimName: todo-app-claim
       containers:
         - name: todo-app
+<<<<<<< Updated upstream
           image: teemukoivumaa/todo-app:0.6
+=======
+          image: teemukoivumaa/todo-app:0.7
+>>>>>>> Stashed changes
           imagePullPolicy: Always
           volumeMounts:
           - name: shared-log

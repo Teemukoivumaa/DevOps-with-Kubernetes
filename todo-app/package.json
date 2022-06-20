@@ -1,6 +1,10 @@
 {
   "name": "TODO-app",
+<<<<<<< Updated upstream
   "version": "0.6.0",
+=======
+  "version": "0.7.0",
+>>>>>>> Stashed changes
   "description": "",
   "main": "server.js",
   "scripts": {
