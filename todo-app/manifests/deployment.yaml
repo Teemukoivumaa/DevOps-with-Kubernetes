@@ -12,6 +12,14 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: shared-log
+          persistentVolumeClaim:
+            claimName: todo-app-claim
       containers:
         - name: todo-app
-          image: teemukoivumaa/todo-app:latest
+          image: teemukoivumaa/todo-app:0.6
+          imagePullPolicy: Always
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/files
