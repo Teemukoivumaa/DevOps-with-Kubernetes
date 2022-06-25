@@ -5,13 +5,8 @@ const fs = require('fs')
 let app = express()
 let port = process.env.PORT || 8080
 
-<<<<<<< Updated upstream
 const dir = path.join('/', 'usr', 'src', 'app', 'files')
 //const dir = path.join('./')
-=======
-//const dir = path.join('/', 'usr', 'src', 'app', 'files')
-const dir = path.join('./')
->>>>>>> Stashed changes
 
 app.use(express.static(dir));
 
@@ -61,11 +56,6 @@ app.get('/', async function(req, res) {
     res.send
         (
         ` 
-<<<<<<< Updated upstream
-        </br> </br>
-        <h2>Todo-app</h2>
-        <img src="${pictureName}" width="500" height="600">
-=======
         <h2>Todo-app</h2>
         <img src="${pictureName}" width="500" height="600">
         </br> </br> </br>
@@ -79,7 +69,6 @@ app.get('/', async function(req, res) {
             <li>Learn more about kubernetes</li>
         </ul>
         </br> </br> </br> </br>
->>>>>>> Stashed changes
         `
         )
 
