@@ -18,7 +18,7 @@ spec:
             claimName: todo-app-claim
       containers:
         - name: todo-app
-          image: teemukoivumaa/todo-app:0.6
+          image: teemukoivumaa/todo-app:0.7
           imagePullPolicy: Always
           volumeMounts:
           - name: shared-log

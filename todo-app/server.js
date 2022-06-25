@@ -56,9 +56,19 @@ app.get('/', async function(req, res) {
     res.send
         (
         ` 
-        </br> </br>
         <h2>Todo-app</h2>
         <img src="${pictureName}" width="500" height="600">
+        </br> </br> </br>
+        <label for="todo-input">Add new TODO:</label></br>
+        <input type="text" id="todo-input" maxlength="140">
+        <button>Add TODO</button>
+
+        <ul>
+            <li>Compelete exercise 1.12</li>
+            <li>Check new image at 00:00</li>
+            <li>Learn more about kubernetes</li>
+        </ul>
+        </br> </br> </br> </br>
         `
         )
 
