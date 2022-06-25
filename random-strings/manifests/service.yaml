@@ -22,4 +22,4 @@ spec:
   ports:
     - port: 2346 # Ingress port
       protocol: TCP
-      targetPort: 8081 # App port
+      targetPort: 8085 # App port

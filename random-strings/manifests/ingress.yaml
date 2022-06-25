@@ -4,8 +4,7 @@ metadata:
   name: random-strings-ingress
 spec:
   rules:
-  - host: localhost
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
