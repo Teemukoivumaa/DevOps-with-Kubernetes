@@ -10,3 +10,16 @@ spec:
     - port: 2345 # Ingress port
       protocol: TCP
       targetPort: 8080 # App port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-backend-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-app # Pod name
+  ports:
+    - port: 2346 # Ingress port
+      protocol: TCP
+      targetPort: 8081 # App port
