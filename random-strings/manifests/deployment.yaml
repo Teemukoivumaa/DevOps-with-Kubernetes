@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: random-strings
   name: random-strings-dep
 spec:
   replicas: 1
