@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  namespace: random-strings
   name: random-strings-pv
 spec:
   storageClassName: manual
