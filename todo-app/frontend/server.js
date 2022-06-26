@@ -7,9 +7,10 @@ let port = process.env.PORT || 8080
 
 const dir = path.join('/', 'usr', 'src', 'app', 'files')
 //const dir = path.join('./')
-
 app.use(express.static(dir));
+app.use(express.json());
 
+// Picture
 var pictureDate = ""
 var picturePath = ""
 var pictureName = ""
@@ -48,32 +49,29 @@ async function checkImage() {
     await downloadPicture()
 }
 
+const removeFile = async () => new Promise(res => fs.unlink(picturePath, (err) => res()))
+
+app.get('/delete', async function(req, res) { await removeFile(); res.send("OK") })
+// Picture
 
 app.get('/', async function(req, res) {
     console.log("Site pinged")
     await checkImage()
 
-    res.send
-        (
-        ` 
-        <h2>Todo-app</h2>
-        <img src="${pictureName}" width="500" height="600">
-        </br> </br> </br>
-        <label for="todo-input">Add new TODO:</label></br>
-        <input type="text" id="todo-input" maxlength="140">
-        <button>Add TODO</button>
-
-        <ul>
-            <li>Compelete exercise 1.12</li>
-            <li>Check new image at 00:00</li>
-            <li>Learn more about kubernetes</li>
-        </ul>
-        </br> </br> </br> </br>
-        `
-        )
+    res.sendFile(path.join(__dirname, 'main.html'))
 
     console.log("-------------\n\n")
 })
+
+app.get('/index.js', function(req, res) { res.sendFile(path.join(__dirname, 'index.js')) })
+app.get('/image.jpg', function(req, res) { res.sendFile(picturePath) })
+app.get('/todos', async function(req, res) {
+    const response = await axios.get('http://todo-backend-svc:2346/todos')
+    console.log(response)
+})
+
+const todoRoute = require('./todoRoute.js')
+app.use('/newTodo', todoRoute)
 
 app.listen(port, function () {
     console.log("Server started in port: " + port)

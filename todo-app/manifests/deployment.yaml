@@ -17,9 +17,12 @@ spec:
           persistentVolumeClaim:
             claimName: todo-app-claim
       containers:
-        - name: todo-app
-          image: teemukoivumaa/todo-app:0.7
+        - name: todo-app-frontend
+          image: teemukoivumaa/todo-app:1.0
           imagePullPolicy: Always
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
+        - name: todo-app-backend
+          image: teemukoivumaa/todo-backend:1.0
+          imagePullPolicy: Always
