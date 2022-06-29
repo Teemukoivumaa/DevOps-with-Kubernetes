@@ -65,9 +65,9 @@ app.get('/', async function(req, res) {
 
 app.get('/index.js', function(req, res) { res.sendFile(path.join(__dirname, 'index.js')) })
 app.get('/image.jpg', function(req, res) { res.sendFile(picturePath) })
-app.get('/todos', async function(req, res) {
+app.get('/getTodos', async function(req, res) {
     const response = await axios.get('http://todo-backend-svc:2346/todos')
-    console.log(response)
+    res.send(JSON.stringify(response.data))
 })
 
 const todoRoute = require('./todoRoute.js')
