@@ -5,8 +5,8 @@ const readLastLines = require('read-last-lines');
 const axios = require('axios')
 const router = express.Router();
 
-//const dir = path.join('/', 'usr', 'src', 'app', 'files')
-const dir = path.join('./')
+const dir = path.join('/', 'usr', 'src', 'app', 'files')
+//const dir = path.join('./')
 const filePath = path.join(dir, 'log.txt')
 
 let app = express();
@@ -33,7 +33,7 @@ const readFilesLastLine = (path) => {
 async function randomText() {
     let randomString = (Math.random() + 1).toString(36).substring(7);
     
-    let timestamp = "Test"//await readFilesLastLine(filePath)
+    let timestamp = await readFilesLastLine(filePath)
     timestampedText = `${timestamp} : ${randomString}`;
     console.log(timestampedText);
     
@@ -42,12 +42,13 @@ async function randomText() {
     setTimeout(randomText, 5000);
 }
 
-app.get('/status', function(req, res) {
+app.get('/', function(req, res) {
     console.log("Getting status");
     res.send
         (
         `
         </br> </br>
+        <h2>${process.env.MESSAGE}</h2>
         <h2>${timestampedText}</h2>
         <h2>${pingpongText}</h2>
         `

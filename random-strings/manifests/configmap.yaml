@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: random-strings
+  name: random-strings-configmap
+data:
+  MESSAGE: "Hello from the configmap!"
