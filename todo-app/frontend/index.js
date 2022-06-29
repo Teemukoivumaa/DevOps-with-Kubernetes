@@ -1,5 +1,5 @@
 async function getTodos() {
-    const response = await fetch('/todos', {
+    const response = await fetch('/getTodos', {
         method: 'GET',
         mode: 'no-cors',
     })
