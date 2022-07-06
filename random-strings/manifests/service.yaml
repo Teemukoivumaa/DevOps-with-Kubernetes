@@ -24,4 +24,19 @@ spec:
   ports:
     - port: 2346 # Ingress port
       protocol: TCP
-      targetPort: 8085 # App port
+      targetPort: 8081 # App port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: random-strings
+  name: postgres-svc
+  labels:
+    app: postgres
+spec:
+  clusterIP: None
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      name: web
