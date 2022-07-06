@@ -5,3 +5,5 @@ metadata:
   name: random-strings-configmap
 data:
   MESSAGE: "Hello from the configmap!"
+  PINGPONGPORT: "8081"
+  RANDOMSTRINGPORT: "8080"
