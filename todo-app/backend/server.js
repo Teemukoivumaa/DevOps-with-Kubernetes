@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 let app = express()
-var port = 8081
+var port = process.env.BACKENDPORT || 8091
 app.use(express.static('./'));
 app.use(express.json());
 app.use(cors())
