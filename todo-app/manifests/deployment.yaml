@@ -19,7 +19,7 @@ spec:
             claimName: todo-app-claim
       containers:
         - name: todo-app-frontend
-          image: teemukoivumaa/todo-app:1.0
+          image: teemukoivumaa/todo-app:1.0.1
           imagePullPolicy: Always
           volumeMounts:
           - name: shared-log
@@ -31,7 +31,7 @@ spec:
                   name: todo-app-configmap
                   key: FRONTENDPORT
         - name: todo-app-backend
-          image: teemukoivumaa/todo-backend:1.1.0
+          image: teemukoivumaa/todo-backend:1.1.1
           imagePullPolicy: Always
           env:
             - name: BACKENDPORT

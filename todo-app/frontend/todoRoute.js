@@ -4,7 +4,7 @@ const axios = require('axios')
 
 const route = router.post('/', (req, res) => {
     let newTodo = req.body.todo
-    console.log(`New todo to route: "${newTodo}"`)
+    console.log(`New todo to forward: "${newTodo}"`)
     axios.post('http://todo-backend-svc:2346/todos', {
        todo: `${newTodo}`
     })

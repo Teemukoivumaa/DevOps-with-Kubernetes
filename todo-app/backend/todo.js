@@ -10,7 +10,11 @@ startDB()
 
 const newTodos = router.post('/', (req, res) => {
     var newTodo = req.body.todo
-    if (!newTodo || newTodo.trim() == "") res.sendStatus(400)
+    console.log(`New todo request: ${newTodo}`)
+    if (!newTodo || newTodo.trim() == ""|| newTodo.length > 140) {
+        console.log(`Non allowed todo request: ${newTodo}`)
+        res.sendStatus(400) 
+    }
     else {
         newTodo = newTodo.trim()
         console.log(`New todo: ${newTodo}`)
@@ -21,7 +25,6 @@ const newTodos = router.post('/', (req, res) => {
 
 const addTodo = (todo) => {
     const insertQuery = `INSERT INTO todos(todo) values('${todo}');`
-    console.log(insertQuery)
     if (!queryDB(insertQuery)) {
         console.log("Failed to insert new todo")
     } else console.log("Inserted todo")
@@ -44,6 +47,7 @@ const fetchTodos = (res) => {
         }
 
         res.send(JSON.stringify(todos))
+        console.log('Delivered todos')
     })
 }
 
