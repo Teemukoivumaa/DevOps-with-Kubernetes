@@ -23,6 +23,7 @@ const imageExists = async () => new Promise(res => {
 })
 
 async function downloadPicture() {
+    console.log("Downloading picture")
     const response = await axios.get('https://picsum.photos/1200', { responseType: 'stream' })
     response.data.pipe(fs.createWriteStream(picturePath))
     console.log("Todays picture downloaded")
@@ -66,8 +67,10 @@ app.get('/', async function(req, res) {
 app.get('/index.js', function(req, res) { res.sendFile(path.join(__dirname, 'index.js')) })
 app.get('/image.jpg', function(req, res) { res.sendFile(picturePath) })
 app.get('/getTodos', async function(req, res) {
+    console.log("Forwarding request to get todos")
     const response = await axios.get('http://todo-backend-svc:2346/todos')
     res.send(JSON.stringify(response.data))
+    console.log("Returned todos")
 })
 
 const todoRoute = require('./todoRoute.js')
