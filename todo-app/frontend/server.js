@@ -3,7 +3,7 @@ const axios = require('axios')
 const path = require('path')
 const fs = require('fs')
 let app = express()
-let port = process.env.BACKENDPORT || 8091
+let port = process.env.FRONTENDPORT || 8091
 
 const dir = path.join('/', 'usr', 'src', 'app', 'files')
 //const dir = path.join('./')
