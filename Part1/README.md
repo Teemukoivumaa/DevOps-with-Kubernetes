@@ -439,7 +439,7 @@ Style the page
 # Diagrams for the applications
 
 ## ToDo-application
-![](./Screenshots/ToDo-App_diagram.jpg "ToDo-application diagram")
+![](./Screenshots/ToDo-app_diagram.jpg "ToDo-application diagram")
 
 ## Random strings && Pingpong
 ![](./Screenshots/Random-strings_diagram.jpg "Random strings && Pingpong diagram")
