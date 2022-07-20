@@ -4,7 +4,7 @@ metadata:
   namespace: random-strings
   name: random-strings-svc
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: random-strings # Pod name
   ports:
@@ -19,7 +19,7 @@ metadata:
   namespace: random-strings
   name: ping-pong-svc
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: random-strings # Pod name
   ports:
