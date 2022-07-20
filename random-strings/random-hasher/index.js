@@ -46,10 +46,24 @@ app.get('/', function(req, res) {
         <h2>${pingpongText}</h2>
         `
         )
-});
+})
+
+app.get('/click', function(req, res) {
+    console.log("Sending PING ...")
+    axios.post('http://ping-pong-svc:2346/add', {
+       abc: 'abc'
+    })
+    .then(function (response) {
+        res.send(response)
+    })
+    .catch(function (error) {
+        console.log(error)
+        res.send(error)
+    })
+})
 
 app.listen(port, function () {
     console.log("Server started in port: " + port);
-});
+})
 
 randomText()

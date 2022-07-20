@@ -20,8 +20,9 @@ spec:
             - name: postgres
               containerPort: 5432
           volumeMounts:
-            - name: data
-              mountPath: /data 
+            - name: postgresql-db-disk
+              mountPath: /data
+              subPath: postgres
           env:
             - name: POSTGRES_USER
               value: "postgres"
@@ -31,10 +32,9 @@ spec:
   volumeClaimTemplates: #VolumeClaim
     - metadata:
         namespace: random-strings
-        name: data
+        name: postgresql-db-disk
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
