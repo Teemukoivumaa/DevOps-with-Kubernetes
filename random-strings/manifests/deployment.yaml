@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: random-strings
-          image: teemukoivumaa/random-strings:1.1.0
+          image: teemukoivumaa/random-strings:1.1.1
           imagePullPolicy: "Always"
           env:  # Define the environment variable
             - name: MESSAGE # Notice that the case is different here
@@ -29,7 +29,7 @@ spec:
                   name: random-strings-configmap
                   key: RANDOMSTRINGPORT
         - name: ping-pong
-          image: teemukoivumaa/ping-pong:1.2.0
+          image: teemukoivumaa/ping-pong:1.2.1
           imagePullPolicy: "Always"
           env:
             - name: PINGPONGPORT

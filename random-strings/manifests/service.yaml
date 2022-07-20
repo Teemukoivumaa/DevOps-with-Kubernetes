@@ -4,13 +4,14 @@ metadata:
   namespace: random-strings
   name: random-strings-svc
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: random-strings # Pod name
   ports:
     - port: 2345 # Ingress port
       protocol: TCP
       targetPort: 8080 # App port
+      name: random-strings
 ---
 apiVersion: v1
 kind: Service
@@ -34,7 +35,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  clusterIP: None
+  type: ClusterIP
   selector:
     app: postgres
   ports:

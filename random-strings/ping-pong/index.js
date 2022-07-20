@@ -75,10 +75,7 @@ const sendPingPongs = (pongs) => {
     });
 }
 
-app.get('/pong', function(req, res) {
-    console.log("Pongd")
-    updateDB()
-    
+app.get('/', function(req, res) {    
     client.query(countQuery, (error, response) => {
         if (error) throw error.stack
         console.log("Pongs:", response.rows[0].count)
@@ -91,6 +88,12 @@ app.get('/pong', function(req, res) {
         sendPingPongs(pongs)
     })
 })
+
+app.post('/add', function(req, res) {
+    updateDB()
+    res.send("Success!")
+})
+
 
 startDB()
 
