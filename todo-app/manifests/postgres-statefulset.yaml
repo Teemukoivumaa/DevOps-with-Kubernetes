@@ -21,7 +21,8 @@ spec:
               containerPort: 5432
           volumeMounts:
             - name: data
-              mountPath: /data 
+              mountPath: /data
+              subPath: postgres
           env:
             - name: POSTGRES_USER
               value: "postgres"
@@ -34,7 +35,6 @@ spec:
         name: data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
