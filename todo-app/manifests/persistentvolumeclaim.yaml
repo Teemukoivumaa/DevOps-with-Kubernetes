@@ -4,7 +4,7 @@ metadata:
   namespace: todo-app
   name: todo-app-claim
 spec:
-  storageClassName: manual
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   resources:
