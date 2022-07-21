@@ -48,5 +48,5 @@ jobs:
       - name: Deploy
         run: |-
           kubectl create namespace "todo-app"
-          kustomize build . | kubectl apply -f -
+          kustomize build ./todo-app/ | kubectl apply -f -
           kubectl get services -o wide
