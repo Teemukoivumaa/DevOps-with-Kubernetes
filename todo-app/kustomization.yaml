@@ -7,4 +7,3 @@ resources:
   - ./manifests/configmap.yaml
   - ./manifests/postgres-statefulset.yaml
   - ./manifests/persistentvolume.yaml
-  - ./manifests/persistentvolumeclaim.yaml
