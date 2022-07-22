@@ -47,6 +47,7 @@ jobs:
 
       - name: Deploy
         run: |-
-          kubectl create namespace "todo-app" || true
+          kubectl create namespace ${GITHUB_REF#refs/heads/} || true
+          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
           kubectl apply -k ./todo-app/
           kubectl get services -o wide
