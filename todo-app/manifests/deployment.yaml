@@ -23,6 +23,10 @@ spec:
         - name: todo-app-frontend
           image: teemukoivumaa/todo-app:1.0.1
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "150Mi"
           volumeMounts:
           - name: shared-log
             mountPath: /usr/src/app/files
@@ -35,6 +39,10 @@ spec:
         - name: todo-app-backend
           image: teemukoivumaa/todo-backend:1.1.1
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "150Mi"
           env:
             - name: BACKENDPORT
               valueFrom:

@@ -8,3 +8,4 @@ resources:
   - ./manifests/postgres-statefulset.yaml
   - ./manifests/persistentvolume.yaml
   - ./manifests/persistentvolumeclaim.yaml
+  - ./manifests/horizontalpodautoscaler.yaml
