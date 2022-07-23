@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: random-strings
   name: random-strings-dep
 spec:
   replicas: 1
@@ -17,6 +16,10 @@ spec:
         - name: random-strings
           image: teemukoivumaa/random-strings:1.1.1
           imagePullPolicy: "Always"
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "150Mi"
           env:  # Define the environment variable
             - name: MESSAGE # Notice that the case is different here
               valueFrom:
@@ -31,6 +34,10 @@ spec:
         - name: ping-pong
           image: teemukoivumaa/ping-pong:1.2.1
           imagePullPolicy: "Always"
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "150Mi"
           env:
             - name: PINGPONGPORT
               valueFrom:
