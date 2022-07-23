@@ -13,6 +13,9 @@ spec:
         app: todo-app
     spec:
       volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: db-claim
         - name: shared-log
           persistentVolumeClaim:
             claimName: todo-app-claim

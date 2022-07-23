@@ -42,3 +42,10 @@
 - As your organization grows, so will the cost and complexity of your database and its integration to other parts of the organization
 - Can have unexpected costs
 
+
+# Exercise 3.07: Commitment
+I chose to use the Postgres with PersistentVolumeClaim approach instead of using Google Cloud SQL.
+
+I just tought that using Postgres and making the PVC is more fun. Also having just spend a lot of time debugging why the PVC & PV where I store the daily pictures wasn't working, I was really familiar on how to make them work in GKE. Altough it would kind of make more sense to learn a bit about GCSQL to familiarise myself a bit more on using DBaaS myself. Also I could have skipped all of this debugging by just using the GCSQL.
+
+
