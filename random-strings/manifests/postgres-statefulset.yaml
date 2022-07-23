@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: random-strings
   name: postgres-ss
 spec:
   serviceName: postgres
@@ -31,7 +30,6 @@ spec:
                 name: dbpass
   volumeClaimTemplates: #VolumeClaim
     - metadata:
-        namespace: random-strings
         name: postgresql-db-disk
       spec:
         accessModes: ["ReadWriteOnce"]

@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: random-strings-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: random-strings-dep
+  minReplicas: 1
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 50 
