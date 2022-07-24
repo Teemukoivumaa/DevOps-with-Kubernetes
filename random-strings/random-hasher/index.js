@@ -62,6 +62,34 @@ app.get('/click', function(req, res) {
     })
 })
 
+var health = false
+
+app.get('/healthz', function(req, res) {
+    if (health) {
+        res.status(200)
+        res.send("OK")
+        console.log("Health check ping-pong connection is ok")
+    } else {
+        console.log("Health check ping-pong connection")
+    
+        axios.get('http://ping-pong-svc:2346/healthz')
+        .then(function (response) {
+            console.log(response)
+            health = true
+            console.log("Connection to ping-pong ok")
+            res.status(200)
+            res.send("OK")
+        })
+        .catch(function (error) {
+            health = false
+            console.log(error)
+            console.log("Connection to ping-pong failed")
+            res.status(500)
+            res.send("Error")
+        })
+    }
+})
+
 app.listen(port, function () {
     console.log("Server started in port: " + port);
 })

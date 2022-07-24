@@ -3,21 +3,20 @@ kind: Service
 metadata:
   name: random-strings-svc
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: random-strings # Pod name
   ports:
     - port: 2345 # Ingress port
       protocol: TCP
       targetPort: 8080 # App port
-      name: random-strings
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: ping-pong-svc
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: random-strings # Pod name
   ports:
