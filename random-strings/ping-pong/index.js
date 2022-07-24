@@ -86,7 +86,8 @@ const sendPingPongs = (pongs) => {
     });
 }
 
-app.get('/', function(req, res) {    
+app.get('/', function(req, res) {
+    console.log("New pong")
     client.query(countQuery, (error, response) => {
         if (error) throw error.stack
         console.log("Pongs:", response.rows[0].count)
@@ -101,13 +102,16 @@ app.get('/', function(req, res) {
 })
 
 app.post('/add', function(req, res) {
+    console.log("New pong request")
     updateDB()
+    res.status(200)
     res.send("Success!")
 })
 
 var healthy = false
 
-app.get('/healthz', async function(req, res) {
+app.get('/check', async function(req, res) {
+    console.log("New health check")
     if (healthy) {
         res.status(200)
         res.send("OK")

@@ -70,9 +70,8 @@ app.get('/healthz', function(req, res) {
         res.send("OK")
         console.log("Health check ping-pong connection is ok")
     } else {
-        console.log("Health check ping-pong connection")
-    
-        axios.get('http://ping-pong-svc:2346/healthz')
+        console.log("Request health check")
+        axios.get('http://ping-pong-svc:2346/check')
         .then(function (response) {
             console.log(response)
             health = true
