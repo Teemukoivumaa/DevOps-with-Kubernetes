@@ -30,7 +30,7 @@ spec:
           image: teemukoivumaa/random-strings:1.2.1
           imagePullPolicy: "Always"
           readinessProbe:
-            initialDelaySeconds: 10
+            initialDelaySeconds: 40
             periodSeconds: 5
             httpGet:
               path: /healthz
