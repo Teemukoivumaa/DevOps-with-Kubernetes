@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: random-strings-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: random-strings # Pod name
+  ports:
+    - port: 2345 # Ingress port
+      protocol: TCP
+      targetPort: 8080 # App port
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,12 +27,18 @@ spec:
     spec:
       containers:
         - name: random-strings
-          image: teemukoivumaa/random-strings:1.1.1
+          image: teemukoivumaa/random-strings:1.2.1
           imagePullPolicy: "Always"
+          readinessProbe:
+            initialDelaySeconds: 40
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8080 
           resources:
             limits:
-              cpu: "100m"
-              memory: "150Mi"
+              cpu: "500m"
+              memory: "550Mi"
           env:  # Define the environment variable
             - name: MESSAGE # Notice that the case is different here
               valueFrom:
@@ -31,19 +50,3 @@ spec:
                 configMapKeyRef:
                   name: random-strings-configmap
                   key: RANDOMSTRINGPORT
-        - name: ping-pong
-          image: teemukoivumaa/ping-pong:1.2.1
-          imagePullPolicy: "Always"
-          resources:
-            limits:
-              cpu: "100m"
-              memory: "150Mi"
-          env:
-            - name: PINGPONGPORT
-              valueFrom:
-                configMapKeyRef:
-                  name: random-strings-configmap
-                  key: PINGPONGPORT
-          envFrom:
-            - secretRef:
-                name: dbpass
