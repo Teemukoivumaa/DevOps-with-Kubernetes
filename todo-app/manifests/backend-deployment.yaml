@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-backend-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-backend # Pod name
+  ports:
+    - port: 2346 # Ingress port
+      protocol: TCP
+      targetPort: 8081 # App port
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-backend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-backend
+  template:
+    metadata:
+      labels:
+        app: todo-backend
+    spec:
+      containers:
+        - name: todo-app-backend
+          image: teemukoivumaa/todo-backend:1.2.0
+          imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            httpGet:
+              path: /check
+              port: 8081
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "150Mi"
+          env:
+            - name: BACKENDPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-configmap
+                  key: BACKENDPORT
+          envFrom:
+            - secretRef:
+                name: dbpass
