@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-frontend
+  ports:
+    - port: 2345 # Ingress port
+      protocol: TCP
+      targetPort: 8080 # App port
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-frontend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-frontend
+  template:
+    metadata:
+      labels:
+        app: todo-frontend
+    spec:
+      containers:
+        - name: todo-app-frontend
+          image: teemukoivumaa/todo-app:1.1.0
+          imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 35
+            periodSeconds: 10
+            httpGet:
+              path: /health
+              port: 8080
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "150Mi"
+          env:
+            - name: FRONTENDPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-configmap
+                  key: FRONTENDPORT

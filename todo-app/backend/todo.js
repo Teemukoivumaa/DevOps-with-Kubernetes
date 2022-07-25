@@ -2,11 +2,9 @@ const express = require('express')
 const router = express.Router();
 
 const database = require('./database.js')
-const client = database.client
+var client = database.client
 let startDB = database.startDB
 let queryDB = database.queryDB
-
-startDB()
 
 const newTodos = router.post('/', (req, res) => {
     var newTodo = req.body.todo
@@ -36,8 +34,14 @@ const getTodos = router.get('/', async function(req, res) {
 })
 
 const fetchTodos = (res) => {
+    client.connect()
+    .then(() => console.log("Connected to db"))
+    .catch(err => console.log("Maybe already connected to db"))
+
+    console.log("Getting todos")
     const getQuery = "SELECT * FROM todos;"
     client.query(getQuery, (error, response) => {
+        console.log("Got todos")
         if (error) throw error.stack
         const rows = response.rowCount
         var todos = []
