@@ -11,7 +11,8 @@ var client = new Client({
 const createTableQuery = `
     CREATE TABLE IF NOT EXISTS "todos" (
         id SERIAL PRIMARY KEY,
-        todo VARCHAR NOT NULL
+        todo VARCHAR NOT NULL,
+        done NUMERIC(1)
     );`
 
 async function queryDB(query) {

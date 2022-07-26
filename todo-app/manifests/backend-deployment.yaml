@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: todo-app-backend
-          image: teemukoivumaa/todo-backend:1.2.0
+          image: teemukoivumaa/todo-backend:1.2.1
           imagePullPolicy: Always
           readinessProbe:
             initialDelaySeconds: 30

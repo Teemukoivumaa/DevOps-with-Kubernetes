@@ -65,16 +65,29 @@ app.get('/', async function(req, res) {
 
 app.get('/index.js', function(req, res) { res.sendFile(path.join(__dirname, 'index.js')) })
 app.get('/image.jpg', function(req, res) { res.sendFile(path.join(__dirname, picturePath)) })
-app.get('/getTodos', async function(req, res) {
-    console.log("Forwarding request to get todos")
-    const response = await axios.get('http://todo-backend-svc:2346/todos')
-    console.log(response)
-    res.send(JSON.stringify(response.data))
-    console.log("Returned todos")
-})
 
 const todoRoute = require('./todoRoute.js')
-app.use('/newTodo', todoRoute)
+let addTodo = todoRoute.addTodo
+let getTodos = todoRoute.getTodos
+let getDoneTodos = todoRoute.getDoneTodos
+
+app.use('/newTodo', addTodo)
+app.use('/getTodos', getTodos)
+app.use('/getTodos', getDoneTodos)
+app.post('/updateTodo', async function(req, res) {
+    console.log("Forwarding request to mark todo as done")
+
+    var todoID = req.body.todoID
+    if (todoID && todoID != null) {
+        const response = await axios.put(`http://todo-backend-svc:2346/todos/${todoID}`)
+        res.status(200)
+        res.send("OK")
+        console.log("Returning")
+    } else {
+        res.status(500)
+        res.send("NOT OK")
+    }
+})
 
 var health = false
 

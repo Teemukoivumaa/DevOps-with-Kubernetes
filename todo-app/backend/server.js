@@ -10,9 +10,13 @@ app.use(cors())
 const todoBasics = require('./todo.js')
 let todoPOST = todoBasics.newTodos
 let todoGET = todoBasics.getTodos
+let doneTodoGET = todoBasics.getTodosDone
+let todoPUT = todoBasics.updateTodo
 
 app.use('/todos', todoPOST)
 app.use('/todos', todoGET)
+app.use('/todos', todoPUT)
+app.use('/done', doneTodoGET)
 
 const database = require('./database.js')
 let startDB = database.startDB
