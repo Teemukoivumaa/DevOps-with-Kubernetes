@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-broadcaster-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-broadcaster
+  ports:
+    - port: 2347 # Ingress port
+      protocol: TCP
+      targetPort: 8082 # App port
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-broadcaster-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-broadcaster
+  template:
+    metadata:
+      labels:
+        app: todo-broadcaster
+    spec:
+      containers:
+        - name: todo-broadcaster
+          image: teemukoivumaa/todo-broadcaster:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: BROADCASTERPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-configmap
+                  key: BROADCASTERPORT
+          envFrom:
+            - secretRef:
+                name: dbpass
