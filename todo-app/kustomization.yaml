@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   - ./manifests/frontend-deployment.yaml
   - ./manifests/backend-deployment.yaml
+  - ./manifests/broadcaster-deployment.yaml
   - ./manifests/ingress.yaml
   - ./manifests/configmap.yaml
   - ./manifests/postgres-statefulset.yaml
-  - ./manifests/persistentvolume.yaml
   - ./manifests/persistentvolumeclaim.yaml
   - ./manifests/horizontalpodautoscaler.yaml
