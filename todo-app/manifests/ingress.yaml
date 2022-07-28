@@ -20,3 +20,10 @@ spec:
             name: todo-backend-svc
             port:
               number: 2346
+      - path: /broadcast
+        pathType: Prefix
+        backend:
+          service:
+            name: todo-broadcaster-svc
+            port:
+              number: 2347

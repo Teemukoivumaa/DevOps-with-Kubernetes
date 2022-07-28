@@ -45,6 +45,8 @@ spec:
                 configMapKeyRef:
                   name: todo-app-configmap
                   key: BACKENDPORT
+            - name: NATS_URL
+              value: nats://my-nats:4222
           envFrom:
             - secretRef:
                 name: dbpass

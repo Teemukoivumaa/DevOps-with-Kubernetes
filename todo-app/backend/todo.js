@@ -1,5 +1,6 @@
 const express = require('express')
-const router = express.Router();
+const router = express.Router()
+const axios = require('axios')
 
 const database = require('./database.js')
 var client = database.client
@@ -25,7 +26,23 @@ const addTodo = (todo) => {
     const insertQuery = `INSERT INTO todos(todo, done) values('${todo}', 0);`
     if (!queryDB(insertQuery)) {
         console.log("Failed to insert new todo")
-    } else console.log("Inserted todo")
+    } else {
+        console.log("Inserted todo")
+        console.log("Sending update to broadcaster")
+        
+        axios.post('http://todo-broadcaster-svc:2347/update', {
+            newTodo: "true",
+            todo: `${todo}`,
+            done: "false"
+        })
+        .then(function (response) {
+            if (response.status == 200) console.log("Updating broadcaster OK")
+            else console.log(response)
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+    }
 }
 
 const getTodos = router.get('/', async function(req, res) {
@@ -41,17 +58,38 @@ const getTodosDone = router.get('/done', async function(req, res) {
 const updateTodo = router.put('/:todoID', function (req, res) {
     var todoID = req.params.todoID
     console.log(`Todo id: ${todoID}`)
-    const updateQuery = `UPDATE todos SET done = 1 WHERE id=${todoID}`
+    const updateQuery = `UPDATE todos SET done = 1 WHERE id=${todoID};`
     if (!queryDB(updateQuery)) {
         console.log("Failed to update todo")
         res.status(500)
         res.send("Fail")
     } else { 
         console.log("Updated todo to done") 
+        
+        var getQuery = `SELECT * FROM todos WHERE id=${todoID};`
+        client.query(getQuery, (error, response) => {
+            console.log("Got todo")
+            if (error) throw error.stack
+            
+            axios.post('http://todo-broadcaster-svc:2347/update', {
+                newTodo: "false",
+                todo: `${response.rows[0].todo}`,
+                done: "true"
+            })
+            .then(function (response) {
+                if (response.status == 200) console.log("Updating broadcaster OK")
+                else console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error)
+             })
+        })
+
         res.status(200)
         res.send("OK")
     }
 })
+
 
 const fetchTodos = (res) => {
     client.connect()
