@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-frontend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-frontend
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: todo-frontend
+    spec:
+      containers:
+      - env:
+        - name: FRONTENDPORT
+          valueFrom:
+            configMapKeyRef:
+              key: FRONTENDPORT
+              name: todo-app-configmap
+        image: teemukoivumaa/todo-app:1.1.1
+        imagePullPolicy: Always
+        name: todo-app-frontend
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 35
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 150m
+            memory: 150Mi

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-broadcaster-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-broadcaster
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: todo-broadcaster
+    spec:
+      containers:
+      - env:
+        - name: BROADCASTERPORT
+          valueFrom:
+            configMapKeyRef:
+              key: BROADCASTERPORT
+              name: todo-app-configmap
+        envFrom:
+        - secretRef:
+            name: dbpass
+        image: teemukoivumaa/todo-broadcaster:1.0.0
+        imagePullPolicy: Always
+        name: todo-broadcaster
