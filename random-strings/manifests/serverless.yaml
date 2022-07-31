@@ -1,0 +1,30 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: random-strings-svc
+spec:
+  template:
+    metadata:
+      name: random-strings-svc-v1
+    spec:
+      containers:
+        - image: teemukoivumaa/random-strings:1.2.1
+          ports:
+            - containerPort: 8080
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ping-pong-svc
+spec:
+  template:
+    metadata:
+      name: ping-pong-svc-v1
+    spec:
+      containers:
+        - image: teemukoivumaa/ping-pong:1.3.0
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - secretRef:
+                name: dbpass
