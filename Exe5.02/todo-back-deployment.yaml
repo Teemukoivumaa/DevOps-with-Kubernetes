@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-backend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-backend
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: todo-backend
+    spec:
+      containers:
+      - env:
+        - name: BACKENDPORT
+          valueFrom:
+            configMapKeyRef:
+              key: BACKENDPORT
+              name: todo-app-configmap
+        - name: NATS_URL
+          value: nats://my-nats:4222
+        envFrom:
+        - secretRef:
+            name: dbpass
+        image: teemukoivumaa/todo-backend:1.2.1
+        imagePullPolicy: Always
+        name: todo-app-backend
+        readinessProbe:
+          httpGet:
+            path: /check
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        resources:
+          limits:
+            cpu: 200m
+            memory: 150Mi
