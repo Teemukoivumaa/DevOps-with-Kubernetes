@@ -6,6 +6,16 @@
 
 </br>
 
+# Exercise 5.04: Platform comparison
+
+I chose Rancher because I have used it before:
+- It's open source
+- Is the market leader in open source native Kubernetes management
+- Installation of Rancher is very easy and quick, all you need is to have Docker installed
+- They offer free online meetups to learn how to use Rancher to easily deploy and manage Kubernetes
+- It supports tools that DevOps teams use: Jenkins, Gitlab or Travis
+- It allows you to manage any cluster and multiple clusters, not just Rancher created clusters
+
 # Exercise 5.06: Landscape
 
 ![](./Screenshots/Exe5.06.jpg "Exe 5.06 landscape")
