@@ -2,7 +2,7 @@ const express = require('express')
 const axios = require('axios')
 
 const app = express()
-var port = process.env.PINGPONGPORT || 8085
+var port = process.env.PORT || 8085
 
 const password = process.env.POSTGRES_PASSWORD.toString()
 const { Client } = require('pg');
