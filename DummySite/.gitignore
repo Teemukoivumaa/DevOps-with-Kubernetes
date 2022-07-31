@@ -1,0 +1,7 @@
+node_modules
+secret.yaml
+key.txt
+secrets.yaml
+*.swp
+.*.swp
+.*.swo
